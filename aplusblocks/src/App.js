@@ -1,26 +1,33 @@
-import React from 'react';
+import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+import Auth from './auth/auth';
+
+const auth2 = new Auth();
+
+
+class App extends Component {
+
+  login() {
+    auth2.login();
+  }
+
+  logout() {
+    auth2.logout();
+  }
+
+  render() {
+
+    return (
+      <div className="App">
+        <header className="App-header">
+          <div onClick={this.login}>login</div>
+          <div onClick={this.logout}>log out</div>
+        </header>
+      </div>
+    );
+  }
 }
 
 export default App;
