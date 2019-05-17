@@ -1,0 +1,41 @@
+.card {
+    background-color: #1EC9AC;
+    text-align: center;
+}
+
+#Students.button { 
+    background-color: #383838;
+    color: #FFF;
+}
+
+#Students.button:hover {
+    background-color: gray;
+}
+
+#Create.button { 
+    background-color: #383838;
+    color: #FFF;
+}
+
+#Create.button:hover {
+    background-color: gray;
+}
+
+#Edit.button { 
+    background-color: #383838;
+    color: #FFF;
+}
+
+#Edit.button:hover {
+    background-color: gray;
+}
+
+#welcome {
+    color: #FFF;
+
+}
+
+#menu {
+    border-style: outset;
+}
+
