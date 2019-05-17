@@ -16,17 +16,17 @@ function readSpreadSheet(file) {
         let workbook = XLSX.read(data, { type: "array" });
 
         let ws = workbook.Sheets["Sheet1"];
-        let json3 = {};
+        let jsonObj = {};
         Object.keys(workbook.Sheets).forEach((key, index) => {
 
             ws = workbook.Sheets[key];
 
-            json3[key] = XLSX.utils.sheet_to_json(ws);
+            jsonObj[key] = XLSX.utils.sheet_to_json(ws);
         });
 
-        console.log(json3);
+        console.log(jsonObj);
 
-        return json3;
+        return jsonObj;
 
     }
     reader.readAsArrayBuffer(file);
