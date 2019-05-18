@@ -2287,12 +2287,12 @@ input[type="submit"].button {
     font-size: 1rem; }
 
 .subtitle {
-  color: #0a0a0a;
+  color: #4a4a4a;
   font-size: 1.25rem;
   font-weight: 300;
   line-height: 1.25; }
   .subtitle strong {
-    color: #0a0a0a; }
+    color: #363636; }
   .subtitle:not(.is-spaced) + .title {
     margin-top: -1.5rem; }
   .subtitle.is-1 {

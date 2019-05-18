@@ -2,7 +2,6 @@
   background: url("../../assets/background.jpg");
   background-size: cover; }
   .hero .title {
-    color: black;
     font-weight: bold; }
     @media screen and (max-width: 768px) {
       .hero .title {
@@ -29,13 +28,3 @@ h2 {
 @media screen and (min-width: 769px), print {
   .pd {
     padding: 2em 0; } }
-
-.title {
-  color: black;
-  font-weight: bold;
-}    
-
-.subtitle {
-  color: black;
-  font-weight: normal;
-}
