@@ -19,6 +19,7 @@
   "homepage": "https://github.com/dmh34/A-PlusBlocks#readme",
   "dependencies": {
     "create-react-app": "^3.0.1",
+    "express": "^4.17.0",
     "react": "^16.8.6"
   }
 }
