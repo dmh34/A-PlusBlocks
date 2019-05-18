@@ -23,7 +23,7 @@ export default class Auth {
         this.isAuthenticated = this.isAuthenticated.bind(this);
         this.getAccessToken = this.getAccessToken.bind(this);
         this.getIdToken = this.getIdToken.bind(this);
-        //this.renewSession = this.renewSession.bind(this);
+        this.renewSession = this.renewSession.bind(this);
 
     }
 
@@ -65,7 +65,7 @@ export default class Auth {
         this.idToken = null;
         this.expiresAt = 0;
 
-        localStorage.setItem("isLoggedIn");
+        localStorage.removeItem("isLoggedIn");
 
         this.auth0.logout({
             returnTo: ""
@@ -76,6 +76,17 @@ export default class Auth {
     isAuthenticated() {
         let expiresAt = this.expiresAt;
         return new Date.getTime() < expiresAt;
+    }
+
+    renewSession() {
+        this.auth0.checkSession({}, (err, authResult) => {
+            if (authResult && authResult.accessToken && authResult.idToken) {
+                this.setSession(authResult);
+            } else if (err) {
+                this.logout();
+
+            }
+        });
     }
 
 }
