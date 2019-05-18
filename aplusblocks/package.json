@@ -2,8 +2,9 @@
   "name": "aplusblocks",
   "version": "0.1.0",
   "private": true,
-  "proxy":"http://localhost:3001/",
+  "proxy": "http://localhost:3001/",
   "dependencies": {
+    "auth0-js": "^9.10.2",
     "axios": "^0.18.0",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",

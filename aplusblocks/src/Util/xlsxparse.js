@@ -16,7 +16,7 @@ function readSpreadSheet(file, cb) {
         let workbook = XLSX.read(data, { type: "array" });
 
         let ws = workbook.Sheets["Sheet1"];
-        
+
         Object.keys(workbook.Sheets).forEach((key, index) => {
 
             ws = workbook.Sheets[key];
@@ -24,9 +24,6 @@ function readSpreadSheet(file, cb) {
             jsonObj[key] = XLSX.utils.sheet_to_json(ws);
         });
         cb.AddStudents(jsonObj);
-        console.log(jsonObj);
-
-        return jsonObj;
 
     }
     reader.readAsArrayBuffer(file);
