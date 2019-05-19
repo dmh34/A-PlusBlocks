@@ -4,6 +4,7 @@ const PORT = process.env.PORT || 3001;
 const app = express();
 const jwt = require("express-jwt");
 const jwks = require("jwks-rsa");
+const jwtauth = require("express-jwt-authz");
 const controller = require("./Controllers");
 
 let jwtCheck = jwt({
@@ -32,7 +33,7 @@ app.post("/api/students", (req, res) => {
   controller.studentController.addStudents(req, res)
 })
 
-app.get("/api/students", (req, res) => {
+app.get("/api/students", jwtCheck,(req, res) => {
   console.log("route hit");
   controller.studentController.getAllStudents(req, res);
 })

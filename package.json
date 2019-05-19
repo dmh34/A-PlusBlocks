@@ -23,6 +23,7 @@
     "create-react-app": "^3.0.1",
     "express": "^4.17.0",
     "express-jwt": "^5.3.1",
+    "express-jwt-authz": "^2.3.1",
     "jwks-rsa": "^1.5.0",
     "mongoose": "^5.5.9",
     "morgan": "^1.9.1",

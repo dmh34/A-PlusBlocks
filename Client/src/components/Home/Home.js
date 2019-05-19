@@ -1,7 +1,17 @@
 import React, { Component } from 'react';
 import './Home.css';
+import auth from "../../auth/auth";
+
+
+const auth0 = new auth();
+
 
 class Home extends Component {
+   
+  handleLogin(){
+    auth0.login();
+  }
+
     render() {
         let heading = "Building a better tomorrow one quiz at a time.";
         let subheading = "The majority of today's students will end up working in jobs that don't exist yet— using and developing technologies that haven't been invented. Join now to start building a foundation for a better future.";
@@ -15,7 +25,10 @@ class Home extends Component {
                         <div className="is-two-thirds column  is-paddingless">
                             <h2 className="subtitle is-4">{ subheading }</h2>
                         </div>
-                        <a className="button is-large is-primary" id="join" href="/menu">Join Now</a>
+                        <div className="button is-large is-primary" onClick={this.handleLogin}>
+                          Join Now
+                        </div>
+                        
                         </div>
                     </div>
                 </section>

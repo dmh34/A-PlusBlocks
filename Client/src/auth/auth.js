@@ -43,7 +43,7 @@ export default class Auth {
     }
 
     getIdToken() {
-        return this.accessToken;
+        return this.idToken;
     }
 
     setSession(authResult) {
