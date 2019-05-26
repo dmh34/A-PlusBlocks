@@ -2,7 +2,31 @@ const express = require("express");
 const path = require("path");
 const PORT = process.env.PORT || 3001;
 const app = express();
-const controller = require("./Controllers");
+const controller = require("./controllers/studentController");
+
+const jwt = require('express-jwt');
+const jwtAuthz = require('express-jwt-authz');
+const jwksRsa = require('jwks-rsa');
+
+
+const checkJwt = jwt({
+  // Dynamically provide a signing key
+  // based on the kid in the header and 
+  // the signing keys provided by the JWKS endpoint.
+  secret: jwksRsa.expressJwtSecret({
+    cache: true,
+    rateLimit: true,
+    jwksRequestsPerMinute: 5,
+    jwksUri: `https://aplusauth.auth0.com/.well-known/jwks.json`
+  }),
+
+  // Validate the audience and the issuer.
+  audience: 'http://localhost:3001/api/students',
+  issuer: `https://aplusauth.auth0.com/`,
+  algorithms: ['RS256']
+});
+
+const checkScopes = jwtAuthz(['read:students', 'write:students']);
 
 // Define middleware here
 app.use(express.urlencoded({ extended: true }));
@@ -13,13 +37,13 @@ if (process.env.NODE_ENV === "production") {
 }
 
 // Define API routes here
-app.post("/api/students", (req, res) => {
-  controller.studentController.addStudents(req, res)
+app.post("/api/students",checkJwt, (req, res) => {
+  controller.addStudents(req, res)
 })
 
-app.get("/api/students", (req, res) => {
+app.get("/api/students",checkJwt, (req, res) => {
   console.log("route hit");
-  controller.studentController.getAllStudents(req, res);
+  controller.getAllStudents(req, res);
 })
 
 // Send every other request to the React app

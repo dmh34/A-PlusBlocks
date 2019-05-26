@@ -1,13 +1,30 @@
 import axios from "axios";
 
 export default {
-    AddStudents: function (students) {
-        console.log(students);
-        axios.post("/api/students", students)
+    AddStudents: function (students, accToken) {
+        console.log(accToken);
+        //console.log(students);
+
+
+        axios({
+            method: "Post",
+            data: students,
+            url: '/api/students',
+            headers: {
+                authorization: `Bearer ${accToken}`
+            }
+        });
 
     },
 
-    getStudents: function () {
-        return axios.get("/api/students");
+    getStudents: function (accToken) {
+        console.log(accToken);
+        return axios({
+            method: "get",
+            url: '/api/students',
+            headers: {
+                authorization: `Bearer ${accToken}`
+            }
+        });
     }
 }

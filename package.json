@@ -20,6 +20,10 @@
   "dependencies": {
     "create-react-app": "^3.0.1",
     "express": "^4.17.0",
+    "express-jwt": "^5.3.1",
+    "express-jwt-authz": "^2.3.1",
+    "jwks-rsa": "^1.5.0",
+    "path": "^0.12.7",
     "react": "^16.8.6"
   }
 }
