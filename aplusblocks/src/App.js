@@ -1,0 +1,82 @@
+import React, { Component } from 'react';
+import logo from './logo.svg';
+import './App.css';
+import spreadsheet from "./Util/xlsxparse";
+import API from "./Util/API";
+import Auth from './auth/auth';
+import { Route } from "react-router-dom";
+
+function handlefile(e) {
+  console.log(e.target.files);
+  spreadsheet(e.target.files[0], API, auth2.getAccessToken());
+
+}
+
+const auth2 = new Auth();
+
+const handleAuthentication = ({ location }) => {
+  if (/access_token|id_token|error/.test(location.hash)) {
+    auth2.handleAuth();
+  }
+}
+function handleClick() {
+
+}
+
+
+class App extends Component {
+
+  constructor() {
+    super();
+    this.getToke = this.getToke.bind(this);
+    this.login = this.login.bind(this);
+    this.logout = this.logout.bind(this);
+  }
+  getToke() {
+    console.log(auth2.getAccessToken());
+    API.getStudents(auth2.getAccessToken()).then(data => {
+      console.log(data.data);
+    })
+  }
+  login() {
+    auth2.login();
+    auth2.handleAuth();
+  }
+
+  logout() {
+    auth2.logout();
+  }
+
+  render() {
+
+    return (
+      <div>
+        <div className="App">
+          <header className="App-header">
+            <div onClick={this.login}>login</div>
+            <div onClick={this.logout}>log out</div>
+            {console.log(document.cookie)}
+            <div>
+              <input type="file" onChange={handlefile}></input>
+
+
+              <button onClick={this.getToke}>Click here to get students</button>
+              <Route path="/callback" render={(props) => {
+                handleAuthentication(props);
+
+              }} />
+            </div>
+          </header>
+        </div>
+
+      </div>
+    );
+
+  }
+}
+
+
+
+
+
+export default App;

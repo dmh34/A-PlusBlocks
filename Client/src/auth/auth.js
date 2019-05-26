@@ -12,7 +12,8 @@ export default class Auth {
         clientID: 'AMnwJb__N03rd79IUNSisdInPE_vauEb',
         redirectUri: 'http://localhost:3000/callback',
         responseType: 'token id_token',
-        scope: 'openid'
+        audience: 'http://localhost:3001/api/students',
+        scope: 'openid read:students write:students'
     });
 
     constructor() {
@@ -39,6 +40,7 @@ export default class Auth {
     }
 
     getAccessToken() {
+        console.log("getting tokem");
         return this.accessToken;
     }
 
@@ -58,6 +60,7 @@ export default class Auth {
 
     login() {
         this.auth0.authorize();
+
     }
 
     logout() {
