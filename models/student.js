@@ -10,7 +10,16 @@ const studentSchema = new Schema([{
     },
     gradeYear: {
         type: Number, required: true
-    }
+    },
+    teacher: {
+        type: Schema.Types.ObjectId, ref: 'Teacher', required: true
+    },
+    classes: [{
+        type: Schema.Types.ObjectId, ref: 'Classes'
+    }],
+    quizGrades: [{
+        type: Array, default: []
+    }]
 }]);
 
 const Student = mongoose.model("Student", studentSchema);

@@ -4,6 +4,7 @@ const morgan = require('morgan');
 const bodyParser = require('body-parser');
 const teacherRoutes = require('./api/routes/teachers');
 const classesRoutes = require('./api/routes/classes');
+const studentRoutes = require('./api/routes/students')
 const mongoose = require('mongoose');
 
 mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/aPlusQuiz");
@@ -26,6 +27,7 @@ app.use((req, res, next) => {
 
 app.use('/teachers', teacherRoutes);
 app.use('/classes', classesRoutes);
+app.use('/students', studentRoutes);
 
 
 app.use((req, res, next) => {

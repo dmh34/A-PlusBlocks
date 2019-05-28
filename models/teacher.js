@@ -10,7 +10,13 @@ const teacherSchema = new Schema([{
     },
     lastName: {
         type: String, required: true
-    }
+    },
+    classes: [{
+        type: Schema.Types.ObjectId, ref: 'Classes'
+    }],
+    students: [{
+        type: Schema.Types.ObjectId, ref: 'Student'
+    }]
 }]);
 
 module.exports = mongoose.model("Teacher", teacherSchema);
