@@ -25,7 +25,7 @@ const checktJwt = jwt({
     algorithms: ['RS256']
 })
 
-const checkScopes = jwtAuthz(['read:students', 'write:students']);
+//const checkScopes = jwtAuthz(['read:students', 'write:students']);
 
 mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/aPlusQuiz");
 

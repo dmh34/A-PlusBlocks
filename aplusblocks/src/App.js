@@ -40,7 +40,7 @@ class App extends Component {
   }
   login() {
     auth2.login();
-    auth2.handleAuth();
+
   }
 
   logout() {

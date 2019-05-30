@@ -26,5 +26,15 @@ export default {
                 authorization: `Bearer ${accToken}`
             }
         });
+    },
+
+    getTeacher: function (accToken) {
+        return axios({
+            method: "get",
+            url: "/api/teacher",
+            headers: {
+                authorization: `Bearer ${accToken}`
+            }
+        })
     }
 }

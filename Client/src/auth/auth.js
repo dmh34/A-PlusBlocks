@@ -1,4 +1,5 @@
 import auth0 from "auth0-js";
+import AUTH0_ENV from "./authConstant";
 
 export default class Auth {
 
@@ -8,12 +9,12 @@ export default class Auth {
 
 
     auth0 = new auth0.WebAuth({
-        domain: 'aplusauth.auth0.com',
-        clientID: 'AMnwJb__N03rd79IUNSisdInPE_vauEb',
-        redirectUri: 'http://localhost:3000/callback',
-        responseType: 'token id_token',
-        audience: 'http://localhost:3001/api/students',
-        scope: 'openid read:students write:students'
+        domain: AUTH0_ENV.AUTH0_DOMAIN,
+        clientID: AUTH0_ENV.AUTH0_CLIENT_ID,
+        redirectUri: AUTH0_ENV.REDIRECTURI,
+        responseType: AUTH0_ENV.RESPONSE_TYPE,
+        audience: AUTH0_ENV.AUDIENCE,
+        scope: AUTH0_ENV.SCOPE
     });
 
     constructor() {
