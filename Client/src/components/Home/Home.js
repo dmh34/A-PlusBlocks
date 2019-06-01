@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './Home.css';
 import auth from "../../auth/auth";
+import File from "../FileImport/ImportFile";
 
 
 const auth0 = new auth();
@@ -27,6 +28,9 @@ class Home extends Component {
                         </div>
                         <div className="button is-large is-primary" onClick={this.handleLogin}>
                           Join Now
+                        </div>
+                        <div>
+                            <File></File>
                         </div>
                         
                         </div>

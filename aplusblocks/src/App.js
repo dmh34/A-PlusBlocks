@@ -9,7 +9,7 @@ import { Route } from "react-router-dom";
 
 function handlefile(e) {
   console.log(e.target.files);
-  spreadsheet(e.target.files[0], API, auth2.getAccessToken());
+  
 
 }
 

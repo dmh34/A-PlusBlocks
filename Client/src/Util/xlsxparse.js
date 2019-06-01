@@ -6,7 +6,7 @@ import XLSX from "xlsx";
  * 
  * @returns json object of all sheets in document
  */
-function readSpreadSheet(file, cb, token) {
+function readSpreadSheet(file, cb) {
     let jsonObj = {};
     let reader = new FileReader();
 
@@ -24,7 +24,7 @@ function readSpreadSheet(file, cb, token) {
 
             jsonObj[key] = XLSX.utils.sheet_to_json(ws);
         });
-        cb.AddStudents(jsonObj, token);
+        cb(jsonObj);
 
     }
     reader.readAsArrayBuffer(file);

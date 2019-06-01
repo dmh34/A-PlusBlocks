@@ -1,4 +1,5 @@
 import axios from "axios";
+import xlsx from "../Util/xlsxparse";
 
 export default {
     getTeachers: function () {
@@ -35,6 +36,11 @@ export default {
 
     updateStudent: function (id, data) {
         return axios.patch("/students/" + id, data);
+    },
+
+    importStudents: function(data){
+        
+        return axios.post("/students", data);
     }
 
 
