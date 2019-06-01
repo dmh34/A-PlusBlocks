@@ -1,4 +1,5 @@
 const db = require("../models");
+const mongoose = require("mongoose");
 
 // Defining methods for the TeachersController
 module.exports = {
@@ -53,7 +54,8 @@ module.exports = {
   },
 
   create: function (req, res) {
-    const teacher = new Teacher({
+    
+    const teacher = new db.Teacher({
       _id: new mongoose.Types.ObjectId(),
       firstName: req.body.firstName,
       lastName: req.body.lastName,
@@ -100,4 +102,5 @@ module.exports = {
         console.log(err);
         res.status(500).json({ error: err })
       });
-  };
+  }
+}

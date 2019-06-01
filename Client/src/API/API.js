@@ -1,40 +1,40 @@
 import axios from "axios";
 
 export default {
-    getTeachers: function(){
-        return axios.get("/teacher");           
+    getTeachers: function () {
+        return axios.get("/teachers");
     },
 
-    getTeacher: function(id){
-        return axios.get("/teacher/" + id);
+    getTeacher: function (id) {
+        return axios.get("/teachers/" + id);
     },
 
-    createTeacher: function(data){
-        return axios.post("/teacher",data);
+    createTeacher: function (data) {
+        return axios.post("/teachers", data);
     },
 
-    updateTeacher: function(id,data){
-        return axios.patch("/teacher/"+id,data);
+    updateTeacher: function (id, data) {
+        return axios.patch("/teachers/" + id, data);
     },
 
-    removeTeacher: function(id){
-        return axios.delete("/teacher/"+id);
+    removeTeacher: function (id) {
+        return axios.delete("/teachers/" + id);
     },
 
-    getStudents: function(){
+    getStudents: function () {
         return axios.get("/students");
     },
 
-    getStudent: function(id){
-        return axios.get("/students/"+id);
+    getStudent: function (id) {
+        return axios.get("/students/" + id);
     },
 
-    createStudent: function(data){
+    createStudent: function (data) {
         return axios.post("/students", data);
     },
 
-    updateStudent: function(id,data){
-        return axios.patch("/students/"+id,data);
+    updateStudent: function (id, data) {
+        return axios.patch("/students/" + id, data);
     }
 
 

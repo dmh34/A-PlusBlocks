@@ -3,6 +3,7 @@ import logo from './logo.svg';
 import './App.css';
 import spreadsheet from "./Util/xlsxparse";
 import API from "./Util/API";
+import APIS from "../../Client/src/API/API";
 import Auth from './auth/auth';
 import { Route } from "react-router-dom";
 
@@ -33,13 +34,10 @@ class App extends Component {
     this.logout = this.logout.bind(this);
   }
   getToke() {
-    console.log(auth2.getAccessToken());
-    API.getStudents(auth2.getAccessToken()).then(data => {
-      console.log(data.data);
-    })
+    console.log(APIS.getTeachers());
   }
   login() {
-    auth2.login();
+
 
   }
 

@@ -1,9 +1,7 @@
 const mongoose = require('mongoose');
 const express = require('express');
 const router = express.Router();
-const Classes = require('../../models/classes');
-const Teacher = require('../../models/teacher');
-const Student = require('../../models/student');
+
 const controller = require("../../controllers");
 
 router.get('/', (req, res, next) => {
@@ -33,7 +31,7 @@ router.get('/', (req, res, next) => {
 	// 	.catch(err => {
 	// 		res.status(500).json(err)
 	// 	});
-	controller.StudentController.getAllStudents(req,res);
+	controller.StudentController.getAllStudents(req, res);
 });
 
 router.post('/', (req, res, next) => {
@@ -84,7 +82,7 @@ router.post('/', (req, res, next) => {
 	// 			error: err
 	// 		});
 	// 	});
-	controller.studentController.addStudents(req, res);
+	controller.StudentController.addStudents(req, res);
 });
 
 router.get('/:studentId', (req, res, next) => {
@@ -103,7 +101,7 @@ router.get('/:studentId', (req, res, next) => {
 	// 		console.log(err);
 	// 		res.status(500).json({ error: err });
 	// 	});
-	controller.studentController.findStudentById(req,res);
+	controller.StudentController.findStudentById(req, res);
 });
 
 // PATCH :classesId req.body looks something like: 
@@ -122,7 +120,7 @@ router.patch('/:studentId', (req, res, next) => {
 	// 		res.status(500).json(result);
 	// 	});
 
-	controller.studentController.updateStudents(req,res);
+	controller.StudentController.updateStudents(req, res);
 });
 
 /* 
@@ -158,7 +156,7 @@ router.patch('/getclasses/:studentId', (req, res, next) => {
 	// 		console.log(err);
 	// 		res.status(500).json({ error: err });
 	// 	})
-	controller.studentController.findAllStudentClasses(req,res);
+	controller.StudentController.findAllStudentClasses(req, res);
 });
 
 router.delete('/:studentId', (req, res, next) => {
@@ -179,7 +177,7 @@ router.delete('/:studentId', (req, res, next) => {
 	// 		console.log(err);
 	// 		res.status(500).json({ error: err })
 	// 	});
-	controller.studentController.removeStudent(req,res);
+	controller.StudentController.removeStudent(req, res);
 });
 
 module.exports = router;

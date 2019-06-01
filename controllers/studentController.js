@@ -1,4 +1,5 @@
 const db = require("../models");
+const mongoose = require("mongoose");
 
 
 module.exports = {
@@ -11,7 +12,7 @@ module.exports = {
                         message: "Teacher not found"
                     });
                 }
-                const student = new Student({
+                const student = new db.Students({
                     _id: mongoose.Types.ObjectId(),
                     firstName: req.body.firstName,
                     lastName: req.body.lastName,
@@ -54,7 +55,7 @@ module.exports = {
     },
 
     getAllStudents: function (req, res) {
-        db.Student.find()
+        db.Students.find()
             .select('firstName lastName gradeYear teacher classes _id')
             .populate('classes', 'subject teacher grade')
             .exec()
@@ -85,7 +86,7 @@ module.exports = {
 
     findStudentById: function (req, res) {
         const id = req.params.studentId;
-        db.Student.findById(id)
+        db.Students.findById(id)
             .exec()
             .then(doc => {
                 console.log("From database", doc);
