@@ -88,38 +88,41 @@ router.post('/', (req, res, next) => {
 });
 
 router.get('/:studentId', (req, res, next) => {
-	const id = req.params.studentId;
-	Student.findById(id)
-		.exec()
-		.then(doc => {
-			console.log("From database", doc);
-			if (doc) {
-				res.status(200).json(doc);
-			} else {
-				res.status(404).json({ message: 'No valid entry found' })
-			}
-		})
-		.catch(err => {
-			console.log(err);
-			res.status(500).json({ error: err });
-		});
+	// const id = req.params.studentId;
+	// Student.findById(id)
+	// 	.exec()
+	// 	.then(doc => {
+	// 		console.log("From database", doc);
+	// 		if (doc) {
+	// 			res.status(200).json(doc);
+	// 		} else {
+	// 			res.status(404).json({ message: 'No valid entry found' })
+	// 		}
+	// 	})
+	// 	.catch(err => {
+	// 		console.log(err);
+	// 		res.status(500).json({ error: err });
+	// 	});
+	controller.studentController.findStudentById(req,res);
 });
 
 // PATCH :classesId req.body looks something like: 
 // [{"propName": "subject", "value": "Basic Training" }]
 
 router.patch('/:studentId', (req, res, next) => {
-	const id = req.params.studentId;
-	const updateOps = {};
-	for (const ops of req.body) {
-		updateOps[ops.propName] = ops.value;
-	}
-	Student.update({ _id: id }, { $set: updateOps })
-		.exec()
-		.then(result => {
-			console.log(result);
-			res.status(500).json(result);
-		});
+	// const id = req.params.studentId;
+	// const updateOps = {};
+	// for (const ops of req.body) {
+	// 	updateOps[ops.propName] = ops.value;
+	// }
+	// Student.update({ _id: id }, { $set: updateOps })
+	// 	.exec()
+	// 	.then(result => {
+	// 		console.log(result);
+	// 		res.status(500).json(result);
+	// 	});
+
+	controller.studentController.updateStudents(req,res);
 });
 
 /* 
@@ -129,52 +132,54 @@ router.patch('/:studentId', (req, res, next) => {
 */
 
 router.patch('/getclasses/:studentId', (req, res, next) => {
-	Classes.find({ students: req.params.studentId })
-		.exec()
-		.then(result => {
-			console.log(result);
-			res.status(500).json(result);
-			let classList = [];
-			for (let i = 0; i < result.length; i++) {
-				classList.push(result[i]._id)
-				console.log(classList)
-			}
-			return classList;
-		})
-		.then(classList => {
-			Student.findOneAndUpdate({ _id: req.params.studentId }, { $set: { classes: classList } },
-				function (error, success) {
-					if (error) {
-						console.log(error);
-					} else {
-						console.log(success);
-					}
-				});
-		})
-		.catch(err => {
-			console.log(err);
-			res.status(500).json({ error: err });
-		})
+	// Classes.find({ students: req.params.studentId })
+	// 	.exec()
+	// 	.then(result => {
+	// 		console.log(result);
+	// 		res.status(500).json(result);
+	// 		let classList = [];
+	// 		for (let i = 0; i < result.length; i++) {
+	// 			classList.push(result[i]._id)
+	// 			console.log(classList)
+	// 		}
+	// 		return classList;
+	// 	})
+	// 	.then(classList => {
+	// 		Student.findOneAndUpdate({ _id: req.params.studentId }, { $set: { classes: classList } },
+	// 			function (error, success) {
+	// 				if (error) {
+	// 					console.log(error);
+	// 				} else {
+	// 					console.log(success);
+	// 				}
+	// 			});
+	// 	})
+	// 	.catch(err => {
+	// 		console.log(err);
+	// 		res.status(500).json({ error: err });
+	// 	})
+	controller.studentController.findAllStudentClasses(req,res);
 });
 
 router.delete('/:studentId', (req, res, next) => {
-	const id = req.params.studentId;
-	Student.remove({ _id: id })
-		.exec()
-		.then(result => {
-			res.status(200).json({
-				message: "Student deleted",
-				request: {
-					type: "POST",
-					url: "http://localhost:3000/students",
-					body: { studentId: "ID", subject: "STRING" }
-				}
-			});
-		})
-		.catch(err => {
-			console.log(err);
-			res.status(500).json({ error: err })
-		});
+	// const id = req.params.studentId;
+	// Student.remove({ _id: id })
+	// 	.exec()
+	// 	.then(result => {
+	// 		res.status(200).json({
+	// 			message: "Student deleted",
+	// 			request: {
+	// 				type: "POST",
+	// 				url: "http://localhost:3000/students",
+	// 				body: { studentId: "ID", subject: "STRING" }
+	// 			}
+	// 		});
+	// 	})
+	// 	.catch(err => {
+	// 		console.log(err);
+	// 		res.status(500).json({ error: err })
+	// 	});
+	controller.studentController.removeStudent(req,res);
 });
 
 module.exports = router;
