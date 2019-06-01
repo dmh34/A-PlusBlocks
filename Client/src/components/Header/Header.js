@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './Header.css';
 import { Link } from 'react-router-dom';
-import API from "../../API/API";
+
 
 
 class Header extends Component {
@@ -11,7 +11,6 @@ class Header extends Component {
     this.state = { isToggleOn: false };
 
     this.handleClick = this.handleClick.bind(this);
-    this.handleTest = this.handleTest.bind(this);
   }
 
   handleClick() {
@@ -20,9 +19,6 @@ class Header extends Component {
     }));
   }
 
-  handleTest() {
-    console.log(API.createTeacher({ firstName: "Tim", lastName: "Bob" }));
-  }
 
   render() {
 
