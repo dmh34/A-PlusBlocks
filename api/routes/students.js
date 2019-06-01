@@ -33,7 +33,7 @@ router.get('/', (req, res, next) => {
 	// 	.catch(err => {
 	// 		res.status(500).json(err)
 	// 	});
-	controller.studentController.addStudents(req, res);
+	controller.StudentController.getAllStudents(req,res);
 });
 
 router.post('/', (req, res, next) => {
