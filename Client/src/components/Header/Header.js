@@ -38,7 +38,7 @@ class Header extends Component {
           </span>
 
           <div className={'nav-right nav-menu ' + menuActive}>
-            <div className="button is-primary is-outlined" onClick={this.handleTest}>Click</div>
+
 
             <Link to="/" className="nav-item r-item">Home</Link>
             <Link to="/faq" className="nav-item r-item">About</Link>
@@ -106,7 +106,7 @@ class Header extends Component {
   //   return (
   //     <nav className="navbar is-link">
   //       <div className="navbar-brand is-dark">
-        
+
   //         <Link
   //           className="navbar-item "
   //           to="/dashboard"
@@ -132,7 +132,7 @@ class Header extends Component {
   //         <importxlsx></importxlsx>
   //     </div>
   //     </nav>
-      
+
   //   );
   // }
 }

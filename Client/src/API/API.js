@@ -22,8 +22,9 @@ export default {
         return axios.delete("/teachers/" + id);
     },
 
-    getStudents: function () {
-        return axios.get("/students");
+    getStudents: async function () {
+        let students = await axios.get("/students/")
+        return students.data;
     },
 
     getStudent: function (id) {
@@ -38,8 +39,8 @@ export default {
         return axios.patch("/students/" + id, data);
     },
 
-    importStudents: function(data){
-        
+    importStudents: function (data) {
+
         return axios.post("/students", data);
     }
 
