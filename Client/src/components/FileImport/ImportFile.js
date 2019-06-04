@@ -1,6 +1,6 @@
 import React from "react";
 import xlsx from "../../Util/xlsxparse";
-import API from "../../API/API";
+import API from "../../Util/API"
 
 function handlefile(e){
     xlsx(e.target.files[0], API.createStudent);

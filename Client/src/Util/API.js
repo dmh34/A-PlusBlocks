@@ -1,40 +1,49 @@
 import axios from "axios";
+import xlsx from "../Util/xlsxparse";
 
 export default {
-    AddStudents: function (students, accToken) {
-        console.log(accToken);
-        //console.log(students);
-
-
-        axios({
-            method: "Post",
-            data: students,
-            url: '/api/students',
-            headers: {
-                authorization: `Bearer ${accToken}`
-            }
-        });
-
+    getTeachers: function () {
+        return axios.get("/teachers");
     },
 
-    getStudents: function (accToken) {
-        console.log(accToken);
-        return axios({
-            method: "get",
-            url: '/api/students',
-            headers: {
-                authorization: `Bearer ${accToken}`
-            }
-        });
+    getTeacher: function (id) {
+        return axios.get("/teachers/" + id);
     },
 
-    getTeacher: function (accToken) {
-        return axios({
-            method: "get",
-            url: "/api/teacher",
-            headers: {
-                authorization: `Bearer ${accToken}`
-            }
-        })
+    createTeacher: function (data) {
+        return axios.post("/teachers", data);
+    },
+
+    updateTeacher: function (id, data) {
+        return axios.patch("/teachers/" + id, data);
+    },
+
+    removeTeacher: function (id) {
+        return axios.delete("/teachers/" + id);
+    },
+
+    getStudents: async function () {
+        let students = await axios.get("/students/")
+        return students.data;
+    },
+
+    getStudent: function (id) {
+        return axios.get("/students/" + id);
+    },
+
+    createStudent: function (data) {
+        return axios.post("/students", data);
+    },
+
+    updateStudent: function (id, data) {
+        return axios.patch("/students/" + id, data);
+    },
+
+    importStudents: function (data) {
+
+        return axios.post("/students", data);
     }
+
+
+
 }
