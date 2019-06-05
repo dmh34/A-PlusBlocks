@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const mongoose = require('mongoose');
 const Teacher = require('../../models/teacher');
-const controller = require("../../Controllers");
+const controller = require("../../controllers");
 
 router.get('/', (req, res, next) => {
   
