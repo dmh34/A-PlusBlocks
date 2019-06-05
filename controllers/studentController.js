@@ -4,67 +4,37 @@ const mongoose = require("mongoose");
 
 module.exports = {
     addStudents: async function (req, res) {
+        try {
+            let teacher = await db.Teacher.findById(req.body.teacher)
 
-        let teacher = await db.Teacher.findById(req.body.teacher)
-
-        if (!teacher) {
-            return res.status(404).json({
-                message: "Teacher not found"
-            })
-        }
-
-        const student = await new db.Students({
-            _id: mongoose.Types.ObjectId(),
-            firstName: req.body.firstName,
-            lastName: req.body.lastName,
-            teacher: req.body.teacher,
-            gradeYear: req.body.gradeYear
-        });
-        student.save();
-
-        await db.Teacher.findByIdAndUpdate({ _id: student.teacher }, { $push: { students: student._id } }, function (error, success) {
-            if (error) {
-                console.log(error);
-            } else {
-                console.log(success);
+            if (!teacher) {
+                return res.status(404).json({
+                    message: "Teacher not found"
+                })
             }
-        });
+
+            const student = await new db.Students({
+                _id: mongoose.Types.ObjectId(),
+                firstName: req.body.firstName,
+                lastName: req.body.lastName,
+                teacher: req.body.teacher,
+                gradeYear: req.body.gradeYear
+            });
+            student.save();
+
+            await db.Teacher.findByIdAndUpdate({ _id: student.teacher }, { $push: { students: student._id } }, function (error, success) {
+                if (error) {
+                    console.log(error);
+                } else {
+                    console.log(success);
+                }
+            });
+        } catch (err) {
+            res.json(err);
+        }
 
         return res.status(201);
     },
-
-    // .then(result => {
-    //     console.log(result);
-    //     res.status(201).json({
-    //         message: 'Student created',
-    //         createdStudent: {
-    //             _id: result._id,
-    //             firstName: result.firstName,
-    //             lastName: result.lastName,
-    //             teacher: result.teacher,
-    //             gradeYear: result.gradeYear
-    //         },
-    //         request: {
-    //             type: 'GET',
-    //             url: 'http://localhost:3000/students/' + result._id
-    //         }
-    //     });
-    //     Teacher.findOneAndUpdate({ _id: result.teacher }, { $push: { students: result._id } },
-    //         function (error, success) {
-    //             if (error) {
-    //                 console.log(error);
-    //             } else {
-    //                 console.log(success);
-    //             }
-    //         });
-    // })
-    // .catch(err => {
-    //     console.log(err);
-    //     res.status(500).json({
-    //         error: err
-    //     });
-    // });
-
 
     addStudent: function (req, res) {
         db.teacher.findById(req.body.teacher)
@@ -90,34 +60,13 @@ module.exports = {
             .exec();
 
         return res.json(students);
-        // .then(docs => {
-        //     res.json({
-        //         count: docs.length,
-        //         students: docs.map(doc => {
-        //             return {
-        //                 _id: doc._id,
-        //                 firstName: doc.firstName,
-        //                 lastName: doc.lastName,
-        //                 teacher: doc.teacher,
-        //                 classes: doc.classes,
-        //                 gradeYear: doc.gradeYear
-        //                 // request: {
-        //                 //     type: 'GET',
-        //                 //     url: 'http://localhost:3000/students/' + doc._id
-        //                 // }
-        //             }
-        //         })
-        //     });
-        // })
-        // .catch(err => {
-        //     res.status(500).json(err)
-        // });
+
 
     },
 
-    findStudentById: function (req, res) {
+    findStudentById: async function (req, res) {
         const id = req.params.studentId;
-        db.Students.findById(id)
+        let student = await db.Students.findById(id)
             .exec()
             .then(doc => {
                 console.log("From database", doc);
@@ -133,7 +82,7 @@ module.exports = {
             });
     },
 
-    updateStudents: function (req, res) {
+    updateStudents: async function (req, res) {
 
         const id = req.params.studentId;
         const updateOps = {};
@@ -148,7 +97,7 @@ module.exports = {
             });
     },
 
-    findAllStudentClasses: function (req, res) {
+    findAllStudentClasses:async function (req, res) {
         db.Classes.find({ students: req.params.studentId })
             .exec()
             .then(result => {
@@ -177,7 +126,7 @@ module.exports = {
             })
     },
 
-    removeStudent: function (req, res) {
+                    async unction (req, res) {
         const id = req.params.studentId;
         db.Student.remove({ _id: id })
             .exec()

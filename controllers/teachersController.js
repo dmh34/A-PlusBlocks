@@ -3,8 +3,8 @@ const mongoose = require("mongoose");
 
 // Defining methods for the TeachersController
 module.exports = {
-  findAll: function (req, res) {
-    db.Teacher.find()
+  findAll: async function (req, res) {
+    let teachers = await db.Teacher.find()
       .select('firstName lastName classes students _id')
       .populate('classes', 'grade teacher students subject')
       .populate('students', 'firstName lastName gradeYear classes')
@@ -54,7 +54,7 @@ module.exports = {
   },
 
   create: function (req, res) {
-    
+
     const teacher = new db.Teacher({
       _id: new mongoose.Types.ObjectId(),
       firstName: req.body.firstName,
