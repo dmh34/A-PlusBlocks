@@ -4,7 +4,7 @@ const mongoose = require('mongoose');
 const Classes = require('../../models/classes');
 const Teacher = require('../../models/teacher');
 const Student = require('../../models/student');
-const controller = require("../../Controllers");
+const controller = require("../../controllers");
 
 router.get('/', (req, res, next) => {
 	// Classes.find()
