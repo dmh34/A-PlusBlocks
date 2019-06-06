@@ -11,11 +11,11 @@ import Create from './components/Create/Create';
 
 export default (
     <Route name="app" component={App}>
-        <Link path="/" component={Home} />
-        <Route path="/faq" component={Faq} />
-        <Route path="/menu" component={Menu} />
-        <Link path="/Students" component={Students} />
-        <Route path="/Grades" component={Grades} />
-        <Route path="/Create" component={Create} />
+        <Link to="/" component={Home} />
+        <Link to="/faq" component={Faq} />
+        <Link to="/menu" component={Menu} />
+        <Link to="/Students" component={Students} />
+        <Link to="/Grades" component={Grades} />
+        <Link to="/Create" component={Create} />
     </Route>
 );
