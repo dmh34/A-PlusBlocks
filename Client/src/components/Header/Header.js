@@ -45,7 +45,8 @@ class Header extends Component {
 
             <div className="nav-item">
               <p className="control">
-                <Link className="button is-primary is-outlined" to="/menu"> Sign In</Link>
+                <a className="button is-primary is-outlined" href="/menu"> Sign In
+              </a>
               </p>
             </div>
 
