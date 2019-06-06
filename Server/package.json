@@ -1,0 +1,36 @@
+{
+  "name": "a-plusblocks",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dmh34/A-PlusBlocks.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/dmh34/A-PlusBlocks/issues"
+  },
+  "homepage": "https://github.com/dmh34/A-PlusBlocks#readme",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "create-react-app": "^3.0.1",
+    "express": "^4.17.0",
+    "express-jwt": "^5.3.1",
+    "express-jwt-authz": "^2.3.1",
+    "jwks-rsa": "^1.5.0",
+    "mongoose": "^5.5.11",
+    "morgan": "^1.9.1",
+    "path": "^0.12.7",
+    "react": "^16.8.6"
+  },
+  "devDependencies": {
+    "nodemon": "^1.19.0"
+  }
+}
