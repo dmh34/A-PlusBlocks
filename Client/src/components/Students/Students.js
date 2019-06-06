@@ -2,41 +2,9 @@ import React, { Component } from 'react';
 import API from "../../API/API";
 import StudentListItem from "../StudentListItem/StudentListItem";
 import xlsx from "../../Util/xlsxparse";
-//import { connect } from 'react-redux';
 import './Students.css';
 
-/*connect(
-	state => ({
-		student: state.students
-	}),
-	null
-);
-export default class Students extends Component {
-	render() {
-		const { students } = this.props
-		const mapstudents = students.map( (board, index) => {
-			return (
-				<div key = {index} className = 'studentsWrapper'>
-					<h3>{board.quiz}</h3>
-					{board.scores.map( (student, idx) => {
-						return (
-							<div key = {idx} className = 'studentsWrapper'>
-								<p>{student.user}<span>{student.score}%</span></p>
-							</div>
-						)
-					}) }
-				</div>
-			);
-		})
-		return (
-			<div className = 'StudentsComponent'>
-				<h1 className = 'title'>Student</h1>
-				{mapstudents}
-			</div>
-		);
-	}
-};
-*/
+
 
 class Students extends Component {
 
@@ -47,7 +15,6 @@ class Students extends Component {
 
   async componentDidMount() {
     let s = await API.getStudents();
-    console.log(s);
     this.setState({ students: s });
   }
 
@@ -55,8 +22,8 @@ class Students extends Component {
     for (let i = 0; i < this.state.students.length; i++) {
       console.log(this.state.students[i]);
     }
-
   }
+
   render() {
     return (
       <section className="hero is-bold is-fullheight">

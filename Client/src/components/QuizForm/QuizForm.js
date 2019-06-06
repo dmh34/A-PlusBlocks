@@ -26,7 +26,8 @@ class QuizForm extends Component {
     </div>
   );
 
-   renderSelectField = ({ input, label, type, meta: { touched, error }, children }) => (
+
+  renderSelectField = ({ input, label, type, meta: { touched, error }, children }) => (
     <div>
       <label>{label}</label>
       <div>
@@ -37,8 +38,8 @@ class QuizForm extends Component {
       </div>
     </div>
   );
-  
-   renderSelectQuestionTypeField = ({ input, label, type, meta: { touched, error }, children }) => (
+
+  renderSelectQuestionTypeField = ({ input, label, type, meta: { touched, error }, children }) => (
     <div>
       <label>{label}</label>
       <div>
@@ -49,8 +50,8 @@ class QuizForm extends Component {
       </div>
     </div>
   );
-  
-   renderTextAnswers = ({ fields, question, meta: { error } }) => (
+
+  renderTextAnswers = ({ fields, question, meta: { error } }) => (
     <ul>
       <li>
         <button type="button" onClick={() => fields.push()}>Add Answer</button>
@@ -70,25 +71,25 @@ class QuizForm extends Component {
           />
         </li>
       ))}
-          <li>
-           <Field
-            name={`${question}.correctAnswer`}
-            component={this.renderSelectField}
-            label="Correct Answer"
-          >
-            <option value="">Please select correct answer</option>
-             {fields.map((answer, index) => (
-               <option key={index+1} value={index+1}>{`Answer #${index + 1}`}</option>
-             ))}
-          </Field>
-          </li>
-    
+      <li>
+        <Field
+          name={`${question}.correctAnswer`}
+          component={this.renderSelectField}
+          label="Correct Answer"
+        >
+          <option value="">Please select correct answer</option>
+          {fields.map((answer, index) => (
+            <option key={index + 1} value={index + 1}>{`Answer #${index + 1}`}</option>
+          ))}
+        </Field>
+      </li>
+
       {error && <li className="error">{error}</li>}
     </ul>
   );
-  
-  
-   renderQuestions = ({ fields, meta: { touched, error, submitFailed } }) => (
+
+
+  renderQuestions = ({ fields, meta: { touched, error, submitFailed } }) => (
     <ul>
       <li>
         <button type="button" onClick={() => fields.push({})}>Add Question</button>
@@ -143,31 +144,31 @@ class QuizForm extends Component {
 
   render() {
 
-  const { handleSubmit, pristine, reset, submitting } = this.props;
+    const { handleSubmit, pristine, reset, submitting } = this.props;
 
     return (
       <div className="QuizForm">
-         <form name="quiz-form" onSubmit={handleSubmit}>
-	      <Field
-	        name="quizTitle"
-	        type="text"
-	        component={this.renderInputField}
-	        label="Quiz Title"
-	      />
-        <Field
-	        name="quizSynopsis"
-	        type="text"
-	        component={this.renderTextareaField}
-	        label="Quiz Synopsis"
-	      />
-	      <FieldArray name="questions" component={this.renderQuestions} />
-	      <div>
-	        <button type="submit" disabled={submitting}>Submit</button>
-	        <button type="button" disabled={pristine || submitting} onClick={reset}>
-	          Clear Values
+        <form name="quiz-form" onSubmit={handleSubmit}>
+          <Field
+            name="quizTitle"
+            type="text"
+            component={this.renderInputField}
+            label="Quiz Title"
+          />
+          <Field
+            name="quizSynopsis"
+            type="text"
+            component={this.renderTextareaField}
+            label="Quiz Synopsis"
+          />
+          <FieldArray name="questions" component={this.renderQuestions} />
+          <div>
+            <button type="submit" disabled={submitting}>Submit</button>
+            <button type="button" disabled={pristine || submitting} onClick={reset}>
+              Clear Values
 	        </button>
-	      </div>
-	    </form>
+          </div>
+        </form>
       </div>
     );
   }
