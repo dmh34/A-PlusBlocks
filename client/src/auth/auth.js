@@ -94,3 +94,7 @@ export default class Auth {
     }
 
 }
+
+export class Auth2{
+
+}

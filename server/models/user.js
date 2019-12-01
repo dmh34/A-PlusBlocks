@@ -12,8 +12,5 @@ const userSchema = new Schema({
     hash:{
         type: String, require: true
     }
-    
-    
-
 
 })

@@ -29,9 +29,7 @@ class Home extends Component {
                         <div className="button is-large is-primary" onClick={this.handleLogin}>
                           Join Now
                         </div>
-                        <div>
-                            <File></File>
-                        </div>
+                       
                         
                         </div>
                     </div>

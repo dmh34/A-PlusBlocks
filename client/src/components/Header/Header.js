@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import Login  from '../../assets/noun_Login.svg'
 
 
 
+var svg = Login;
 class Header extends Component {
 
   constructor(props) {
@@ -44,7 +46,7 @@ class Header extends Component {
 
             <div className="nav-item">
               <p className="control">
-                <a className="button is-primary is-outlined" href="/menu"> Sign In
+                <a className="button is-primary is-outlined" href="/menu"> <img src ={svg}></img>Sign In
               </a>
               </p>
             </div>
