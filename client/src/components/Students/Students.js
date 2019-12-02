@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import API from "../../Util/API";
 import StudentListItem from "../StudentListItem/StudentListItem";
-import xlsx from "../../Util/xlsxparse";
+import FileImport from "../FileImport/ImportFile.js";
 import './Students.css';
 
 class Students extends Component {
@@ -35,9 +35,7 @@ class Students extends Component {
                 <div className="button is-primary is-large">Add a Student</div>
               </span>
               <span className="sf">
-                <input type="file" placeholder="Import a csv or spreadsheet">
-
-                </input>
+                <FileImport></FileImport>
               </span>
 
             </thead><br></br><thead>
