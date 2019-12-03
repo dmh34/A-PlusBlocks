@@ -63,10 +63,6 @@ class Students extends Component {
 
             </tbody>
           </table>
-
-
-
-
         </div>
       </section>
     );
@@ -75,3 +71,4 @@ class Students extends Component {
 };
 
 export default Students;
+
