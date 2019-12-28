@@ -20,8 +20,8 @@ class Students extends Component {
     for (let i = 0; i < this.state.students.length; i++) {
       console.log(this.state.students[i]);
     }
-
   }
+
   render() {
     return (
       <section className="hero is-bold is-fullheight">

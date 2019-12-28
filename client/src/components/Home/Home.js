@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './Home.css';
 import auth from "../../auth/auth";
-import File from "../FileImport/ImportFile";
+
 
 
 const auth0 = new auth();
