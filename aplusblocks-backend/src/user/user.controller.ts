@@ -1,6 +1,7 @@
-import { Controller, Get, Put, Post, Delete, HttpCode, Param, Body, BadRequestException } from '@nestjs/common';
+import { Controller, Get, Put, Post, Delete, HttpCode, Param, Body, BadRequestException, UseGuards, ParseUUIDPipe, Redirect} from '@nestjs/common';
 
 interface UserDTO{
+    
     userName: string,
     passphrase: string,
     role: string
@@ -12,31 +13,39 @@ export class UserController {
 
     @Get('profile/:id')
     @HttpCode(200)
-    async  getProfile (@Param('id') id:string) :Promise<string>{
-        userServive.findOne(d)
-       if(id === ''){
-           throw new BadRequestException();
-       }
-       return "id-2";
+    async  getProfile (@Param('username') username:string) :Promise<string>{
+        //protected
+       
 
+    }
+
+    @Post('signup')
+    @HttpCode(204)
+    async createUser(@Body() user:UserDTO){
+        //redirect to profile page after successful signup
     }
 
     @Put('profile/:id')
     @HttpCode(202)
     async updateProfile (@Param('id') id:string ) {
-        
+        //protected
+    
     }
 
-    @Post('profile')
-    @HttpCode(204)
-    async createProfile(@Body() userdto:string){
-
+    @Post('login')
+    @UseGuards()
+    @HttpCode(202)
+    async login(@Body() userdto:string){
+        //login logic here 
+        //protected
     }
 
     @Delete('profile/:id')
+    @UseGuards()
     @HttpCode(204)
-    async deleteProfile(@Param('id') id: string){
-
+    async deleteProfile(@Param('id', new ParseUUIDPipe()) id: string){
+        //delete logged in user.
+        //protected
     }
 
 }
