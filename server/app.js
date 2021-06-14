@@ -13,7 +13,7 @@ const userRoutes = require('./api/routes/login');
 const passport = require('./auth');
 const MongoStore = require('connect-mongo');
 
-mongoose.connect(process.env.MONGODB_URI || );
+mongoose.connect(process.env.MONGODB_URI || "");
 
 app.use(morgan('dev'));
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -38,7 +38,7 @@ app.use(session({
     secret: "secert",
     resave: false,
     saveUninitialized: true,
-    store: new MongoStore({mongoUrl: })
+    store: new MongoStore({mongoUrl: ""})
 }));
 
 app.use('/teachers', teacherRoutes);
