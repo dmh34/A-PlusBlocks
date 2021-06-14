@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-const { module } = require("../../Client/webpack.config");
+
 
 const Schema = mongoose.Schema;
 

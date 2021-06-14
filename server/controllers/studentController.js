@@ -13,7 +13,7 @@ module.exports = {
             })
         }
 
-        const student = await new db.Students({
+        const student =  new db.Students({
             _id: mongoose.Types.ObjectId(),
             firstName: req.body.firstName,
             lastName: req.body.lastName,
