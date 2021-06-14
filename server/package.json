@@ -19,6 +19,7 @@
   },
   "homepage": "https://github.com/dmh34/A-PlusBlocks#readme",
   "dependencies": {
+    "bcrypt": "^5.0.1",
     "body-parser": "^1.19.0",
     "create-react-app": "^3.0.1",
     "express": "^4.17.0",
@@ -27,6 +28,8 @@
     "jwks-rsa": "^1.5.0",
     "mongoose": "^5.5.11",
     "morgan": "^1.9.1",
+    "passport": "^0.4.1",
+    "passport-local": "^1.0.0",
     "path": "^0.12.7",
     "react": "^16.8.6"
   },
