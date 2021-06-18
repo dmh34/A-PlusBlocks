@@ -2,6 +2,7 @@ const db = require("../models");
 
 module.exports = {
     findAll: function (req, res) {
+        if (req.isAuthenticated()) {
         db.Classes.find()
             .select('teacher subject grade _id students')
             .populate('teacher', 'firstName lastName')
@@ -30,9 +31,13 @@ module.exports = {
             .catch(err => {
                 res.status(500).json(err)
             });
+        }else{
+            res.status(400).json({message: "User is not logged in"})
+        }
     },
 
     create: function (req, res) {
+        if (req.isAuthenticated()) {
         db.Teacher.findById(req.body.teacher)
             .then(teacher => {
                 if (!teacher) {
@@ -78,9 +83,13 @@ module.exports = {
                     error: err
                 });
             });
+        }else{
+            res.status(400).json({message: "User not logged in"})
+        }
     },
 
     findById: function (req, res) {
+        if (req.isAuthenticated()) {
         const id = req.params.classesId;
         db.Classes.findById(id)
             .exec()
@@ -96,9 +105,13 @@ module.exports = {
                 console.log(err);
                 res.status(500).json({ error: err });
             });
+        }else{
+            res.status(400).json({message: "User not logged in"})
+        }
     },
 
     addStudentToClass: function (req, res) {
+        if (req.isAuthenticated()) {
         const id = req.params.classesId;
         const studentId = req.body.studentId;
 
@@ -113,9 +126,13 @@ module.exports = {
                     error: err
                 });
             });
+        }else{
+            res.status(400).json({message: "User not logged in"})
+        }
     },
 
     update: function (req, res) {
+        if (req.isAuthenticated()) {
         const id = req.params.classesId;
         const updateOps = {};
         for (const ops of req.body) {
@@ -127,9 +144,13 @@ module.exports = {
                 console.log(result);
                 res.status(500).json(result);
             });
+        }else{
+            res.status(400).json({message: "User not loggeg in "})
+        }
     },
 
     delete: function (req, res) {
+        if (req.isAuthenticated()) {
         const id = req.params.classesId;
         db.Classes.remove({ _id: id })
             .exec()
@@ -147,6 +168,9 @@ module.exports = {
                 console.log(err);
                 res.status(500).json({ error: err })
             });
+        }else{
+            res.status(400).json({message: "User not logged in "})
+        }
     }
 
 

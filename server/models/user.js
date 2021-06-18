@@ -5,16 +5,16 @@ const Schema = mongoose.Schema;
 
 const userSchema = new Schema({
     email: {
-        type: String, require: true
+        type: String, require: true,unique: true
     },
     salt: {
         type: String, require: true
     },
-    hash: {
+    password: {
         type: String, require: true
     },
     instructor: {
-        type: Boolean, require: true
+        type: Boolean, require: false
     }
 
 

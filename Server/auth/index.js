@@ -1,5 +1,5 @@
 const passport = require('passport');
-const passportlocal = require('passport-local').Strategy;
+const LocalStrategy = require('passport-local').Strategy;
 const bcrypt = require('bcrypt');
 const User = require('../models/user');
 
@@ -9,27 +9,35 @@ passport.serializeUser(function(user, done){
 });
 
 passport.deserializeUser(function (id, done) {
-    user.findById(id, (err, user) => {
+    console.log("looking for user")
+    console.log(id);
+    User.findById(id, (err, user) => {
+        console.log("finding user");
         done(err,user)
     });
 });
 
 passport.use(
-    new passportlocal({usernameField: "email"}, (email, password,done)=>{
-        console.log("trying to find user");
+    new LocalStrategy({usernameField: "email"}, (email, password,done)=>{
+       console.log("loaded");
+       console.log(email);
+       console.log(password);
+       
         User.findOne({email: email})
         .then(user=> {
             if(!user){
-                console.log("user being created");
-                const newUser = new User({email, password});
-                console.log("creating user ");
+             
+                const newUser = new User({ email, password});
+                newUser.passport = password;
+               
                 bcrypt.genSalt(10, (err,salt)=>{
                     bcrypt.hash(newUser.password, salt,(err,hash)=>{
                         newUser.password = hash;
+                        newUser.instructor = false;
                         newUser.save().then(user=>{
                             return done(err, user);
                         }).catch(err=>{
-                            return done(null,false,{message: err});
+                            return done(null,false,{message:"Database error" + err});
                         })
                     })
                 })
@@ -39,13 +47,13 @@ passport.use(
                     if(err) throw err;
 
                     if(isMatch){
+                        console.log("user found");
                         return done(null, user);
                     }else{
                         return done(null,false,{message:"wrong username or password"});
                     }
-                }).catch(err=>{
-                    return done (null,false,{message: err});
                 })
+                
             }
         })
     })

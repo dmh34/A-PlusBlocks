@@ -1,34 +1,38 @@
 const db = require("../models");
 const mongoose = require("mongoose");
+const e = require("express");
 
 
 module.exports = {
     addStudents: async function (req, res) {
+        if (req.isAuthenticated()) {
+            let teacher = await db.Teacher.findById(req.body.teacher)
 
-        let teacher = await db.Teacher.findById(req.body.teacher)
-
-        if (!teacher) {
-            return res.status(404).json({
-                message: "Teacher not found"
-            })
-        }
-
-        const student =  new db.Students({
-            _id: mongoose.Types.ObjectId(),
-            firstName: req.body.firstName,
-            lastName: req.body.lastName,
-            teacher: req.body.teacher,
-            gradeYear: req.body.gradeYear
-        });
-        student.save();
-
-        await db.Teacher.findByIdAndUpdate({ _id: student.teacher }, { $push: { students: student._id } }, function (error, success) {
-            if (error) {
-                console.log(error);
-            } else {
-                console.log(success);
+            if (!teacher) {
+                return res.status(404).json({
+                    message: "Teacher not found"
+                })
             }
-        });
+
+            const student = new db.Students({
+                _id: mongoose.Types.ObjectId(),
+                firstName: req.body.firstName,
+                lastName: req.body.lastName,
+                teacher: req.body.teacher,
+                gradeYear: req.body.gradeYear
+            });
+            student.save();
+
+            await db.Teacher.findByIdAndUpdate({ _id: student.teacher }, { $push: { students: student._id } }, function (error, success) {
+                if (error) {
+                    console.log(error);
+                } else {
+                    console.log(success);
+                }
+            });
+        } else {
+            res.status(400).json({ message: "User is not logged in" });
+        }
 
         return res.status(201);
     },
@@ -67,29 +71,37 @@ module.exports = {
 
 
     addStudent: function (req, res) {
-        db.teacher.findById(req.body.teacher)
-            .then(teacher => {
-                if (!teacher) {
-                    return res.status(404).json({
-                        message: "Teacher not found"
-                    })
-                }
+        if (req.isAuthenticated()) {
+            db.teacher.findById(req.body.teacher)
+                .then(teacher => {
+                    if (!teacher) {
+                        return res.status(404).json({
+                            message: "Teacher not found"
+                        })
+                    }
 
-                db.Students.collection.insert(req.body, (err) => {
-                    res.status(400).json({
-                        error: err
+                    db.Students.collection.insert(req.body, (err) => {
+                        res.status(400).json({
+                            error: err
+                        })
                     })
                 })
-            })
+        } else {
+            res.status(400).json({ message: "User not logged in" });
+        }
     },
 
     getAllStudents: async function (req, res) {
-        let students = await db.Students.find()
-            .select('firstName lastName gradeYear teacher classes _id')
-            .populate('classes', 'subject teacher grade')
-            .exec();
+        if (req.isAuthenticated()) {
+            let students = await db.Students.find()
+                .select('firstName lastName gradeYear teacher classes _id')
+                .populate('classes', 'subject teacher grade')
+                .exec();
 
-        return res.json(students);
+            return res.json(students);
+        } else {
+            res.status(400).json({ message: "User is not logged in" })
+        }
         // .then(docs => {
         //     res.json({
         //         count: docs.length,
@@ -134,71 +146,82 @@ module.exports = {
     },
 
     updateStudents: function (req, res) {
-
-        const id = req.params.studentId;
-        const updateOps = {};
-        for (const ops of req.body) {
-            updateOps[ops.propName] = ops.value;
+        if (req.isAuthenticated()) {
+            const id = req.params.studentId;
+            const updateOps = {};
+            for (const ops of req.body) {
+                updateOps[ops.propName] = ops.value;
+            }
+            db.Student.update({ _id: id }, { $set: updateOps })
+                .exec()
+                .then(result => {
+                    console.log(result);
+                    res.status(500).json(result);
+                });
+        } else {
+            res.status(400).json({ message: "User is not logged in" })
         }
-        db.Student.update({ _id: id }, { $set: updateOps })
-            .exec()
-            .then(result => {
-                console.log(result);
-                res.status(500).json(result);
-            });
     },
 
     findAllStudentClasses: function (req, res) {
-        db.Classes.find({ students: req.params.studentId })
-            .exec()
-            .then(result => {
-                console.log(result);
-                res.status(500).json(result);
-                let classList = [];
-                for (let i = 0; i < result.length; i++) {
-                    classList.push(result[i]._id)
-                    console.log(classList)
-                }
-                return classList;
-            })
-            .then(classList => {
-                db.Student.findOneAndUpdate({ _id: req.params.studentId }, { $set: { classes: classList } },
-                    function (error, success) {
-                        if (error) {
-                            console.log(error);
-                        } else {
-                            console.log(success);
-                        }
-                    });
-            })
-            .catch(err => {
-                console.log(err);
-                res.status(500).json({ error: err });
-            })
+        if (req.isAuthenticated()) {
+            db.Classes.find({ students: req.params.studentId })
+                .exec()
+                .then(result => {
+                    console.log(result);
+                    res.status(500).json(result);
+                    let classList = [];
+                    for (let i = 0; i < result.length; i++) {
+                        classList.push(result[i]._id)
+                        console.log(classList)
+                    }
+                    return classList;
+                })
+                .then(classList => {
+                    db.Student.findOneAndUpdate({ _id: req.params.studentId }, { $set: { classes: classList } },
+                        function (error, success) {
+                            if (error) {
+                                console.log(error);
+                            } else {
+                                console.log(success);
+                            }
+                        });
+                })
+                .catch(err => {
+                    console.log(err);
+                    res.status(500).json({ error: err });
+                })
+        } else {
+            res.status(400).json({ message: "User not logged in" })
+        }
     },
 
     removeStudent: function (req, res) {
-        const id = req.params.studentId;
-        db.Student.remove({ _id: id })
-            .exec()
-            .then(result => {
-                res.status(200).json({
-                    message: "Student deleted",
-                    request: {
-                        type: "POST",
-                        url: "http://localhost:3000/students",
-                        body: { studentId: "ID", subject: "STRING" }
-                    }
+        if (req.isAuthenticated()) {
+            const id = req.params.studentId;
+            db.Student.remove({ _id: id })
+                .exec()
+                .then(result => {
+                    res.status(200).json({
+                        message: "Student deleted",
+                        request: {
+                            type: "POST",
+                            url: "http://localhost:3000/students",
+                            body: { studentId: "ID", subject: "STRING" }
+                        }
+                    });
+                })
+                .catch(err => {
+                    console.log(err);
+                    res.status(500).json({ error: err })
                 });
-            })
-            .catch(err => {
-                console.log(err);
-                res.status(500).json({ error: err })
-            });
+        } else {
+            res.status(400).json({ message: "User is not logged in" })
+        }
+
+
+
+
+
     }
-
-
-
-
-
 }
