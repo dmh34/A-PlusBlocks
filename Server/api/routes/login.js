@@ -18,7 +18,7 @@ router.post('/', (req, res, next) => {
         console.log(user)
         if(!user){
             console.log("user not found");
-            return res.status(400).json({errors: "nothing found"});
+            return res.status(401).json({errors: "nothing found"});
         }
 
         req.logIn(user, function(err){

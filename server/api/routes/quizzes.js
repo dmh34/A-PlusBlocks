@@ -1,19 +1,24 @@
 const mongoose = require("mongoose");
+const express = require('express');
+const router = express.Router();
 
-const Schema = mongoose.Schema;
+const controller = require("../../controllers");
 
-const quizSchema = newSchema([{
-    _id: mongoose.Schema.Types.ObjectId,
+router.get('/:id', (req, res, next) => {
+    //controller.quizController.findAll(req, res);
+})
 
-    quizName: {
-        type: String, required: true
-    },
-    questions: [{
-        type: Schema.Types.ObjectId, ref: 'Quiz'
-    }],
-    owner: {
-        type: Schema.Types.ObjectId, ref: 'Teacher'
-    }
+router.post('/create', (req, res, next) => {
+    //controller.quizController.add(req,res);
+})
 
+router.delete('/:quizid', (req, res, next) => {
+    //controller.quizController.delete(req, res);
+})
 
-}])
+router.put('/quizid'(req, res, next)=> {
+    //controler.quizController.update(req,res);
+})
+
+module.exports = router;
+

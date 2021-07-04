@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import Login  from '../../assets/noun_Login.svg'
+import Login from '../../assets/noun_Login.svg'
+import api from '../../Util/API';
 
 
 
@@ -15,9 +16,11 @@ class Header extends Component {
   }
 
   handleClick() {
-    this.setState(prevState => ({
+    /*this.setState(prevState => ({
       isToggleOn: !prevState.isToggleOn
-    }));
+    }));*/
+
+      api.login(data);
   }
 
 

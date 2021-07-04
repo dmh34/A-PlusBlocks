@@ -16,6 +16,7 @@ export default (
     <Route path="/menu" component={Menu} />    
     <Route path="/Students" component={Students} /> 
     <Route path="/Grades" component={Grades} /> 
-    <Route path="/Create" component={Create} />
+        <Route path="/Create" component={Create} />
+        <Route path="/login" component={ }/>
 </Route>     
 );

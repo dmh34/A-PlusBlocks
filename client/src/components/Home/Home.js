@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './Home.css';
 import auth from "../../auth/auth";
-import File from "../FileImport/ImportFile";
+import api from '../../Util'
 
 
 const auth0 = new auth();
@@ -10,7 +10,7 @@ const auth0 = new auth();
 class Home extends Component {
    
   handleLogin(){
-    auth0.login();
+    
   }
 
     render() {
@@ -25,8 +25,9 @@ class Home extends Component {
                         <h1 className="title">{ heading }</h1>
                         <div className="is-two-thirds column  is-paddingless">
                             <h2 className="subtitle is-4">{ subheading }</h2>
-                        </div>
-                        <div className="button is-large is-primary" onClick={this.handleLogin}>
+                            </div>
+                            {/*switch to redirect to login comp.*/}
+                        <div className="button is-large is-primary">
                           Join Now
                         </div>
                        

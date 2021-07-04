@@ -42,8 +42,11 @@ export default {
     importStudents: function (data) {
 
         return axios.post("/students", data);
-    }
+    },
 
+    login: function (data) {
+        return axios.post("/login", data);
+    }
 
 
 }

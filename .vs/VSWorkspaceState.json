@@ -1,8 +1,16 @@
 {
   "ExpandedNodes": [
     "",
-    "\\Client\\src"
+    "\\Client",
+    "\\Client\\src",
+    "\\Client\\src\\auth",
+    "\\Client\\src\\components",
+    "\\Client\\src\\components\\Create",
+    "\\Client\\src\\components\\FileImport",
+    "\\Client\\src\\components\\Footer",
+    "\\Client\\src\\components\\Header",
+    "\\Client\\src\\Util"
   ],
-  "SelectedNode": "\\Client",
+  "SelectedNode": "\\Client\\src\\Util\\xlsxparse.js",
   "PreviewInSolutionExplorer": false
 }

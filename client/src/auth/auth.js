@@ -1,6 +1,8 @@
 import auth0 from "auth0-js";
 import AUTH0_ENV from "./authConstant";
 
+
+
 export default class Auth {
 
     accessToken;

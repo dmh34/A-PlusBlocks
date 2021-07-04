@@ -29,4 +29,13 @@ function readSpreadSheet(file, cb) {
     }
     reader.readAsArrayBuffer(file);
 }
+
+
 export default readSpreadSheet;
+/*
+ * 
+ */ 
+function createWorkbook(data) {
+    let wb = XLSX.utils.
+
+}
