@@ -3,7 +3,7 @@ import { Controller, Get, Put, Post, Delete, HttpCode, Param, Body, BadRequestEx
 interface UserDTO{
     
     userName: string,
-    passphrase: string,
+    passphrase?: string,
     role: string
 }
 
@@ -13,16 +13,17 @@ export class UserController {
 
     @Get('profile/:id')
     @HttpCode(200)
-    async  getProfile (@Param('username') username:string) :Promise<string>{
-        //protected
+    async  getProfile (@Param('id') id:string) :Promise<UserDTO | undefined>{
+        
        
+        return userService.findbyId(id);
 
     }
 
     @Post('signup')
     @HttpCode(204)
     async createUser(@Body() user:UserDTO){
-        //redirect to profile page after successful signup
+        userService.create(user);
     }
 
     @Put('profile/:id')
