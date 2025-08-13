@@ -20,7 +20,7 @@
   "homepage": "https://github.com/dmh34/A-PlusBlocks#readme",
   "dependencies": {
     "body-parser": "^1.19.0",
-    "create-react-app": "^3.0.1",
+    "create-react-app": "^5.0.0",
     "express": "^4.17.0",
     "express-jwt": "^5.3.1",
     "express-jwt-authz": "^2.3.1",
